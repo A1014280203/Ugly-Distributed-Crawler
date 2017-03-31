@@ -1,4 +1,4 @@
-#Ugly-Distributed-Crawler
+# Ugly-Distributed-Crawler
 ## 简陋的分布式爬虫
 新手向。
 基于Redis构建的分布式爬虫  
