@@ -1,7 +1,6 @@
 # Ugly-Distributed-Crawler
 ## 简陋的分布式爬虫
-新手向。
-基于Redis构建的分布式爬虫  
+新手向，基于Redis构建的分布式爬虫。
 以爬取考研网的贴子为例，利用 PyQuery, lxml 进行解析，将符合要求的文章文本存入MySQ数据库中。
 ## 结构简介
 #### cooperator
@@ -32,3 +31,45 @@ lxml => 3.6.0
 
 #### 3. 启动 worker/start.py
 > 默认循环监听是否有新的URL待解析
+
+## 核心点说明
+#### 1. 通过Redis的集合类型进行代理IP和URL的传递
+
+```python
+# Summary Reference
+# ---------
+# 创建句柄
+def make_redis_handler():
+    pool = redis.ConnectionPool(host=r_server['ip'], port=r_server['port'], password=r_server['passwd'])
+    return redis.Redis(connection_pool=pool)
+
+# 获得句柄
+def make_proxy_handler():
+    return make_redis_handler()
+
+# 保存到指定的set下
+def check_and_save(self, proxy):
+ 'pass'
+   self.redis_handler.sadd(r_server['s_name'], proxy)
+```
+#### 2. 由于在验证代理IP和使用封装的get_url()函数的时候网络IO较多，所以使用多线程（效果还是很明显的）。 
+
+```python
+#Summary Reference
+#---------
+def save_proxy_ip(self):
+    'pass'
+    for proxy in self.proxy_ip:
+        Thread(target=self.check_and_save, args=(proxy,)).start()
+
+def get_url(url):
+    'pass'
+    while True:
+    'pass'
+        resp = request('get', url, headers=headers, proxies={'http': proxy})
+    'pass'
+```
+
+## 项目地址
+#### https://github.com/PyCN/Ugly-Distributed-Crawler
+> 有任何问题可以与我联系(微信：smartseer)
