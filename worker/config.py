@@ -12,6 +12,7 @@ r_server = {
     's_url': 'url'
 }
 
+# settings for connecting database
 d_server = {
     'user': 'user',
     'passwd': 'password',
