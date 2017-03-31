@@ -9,6 +9,7 @@ r_server = {
     'port': '6379',
     'passwd': '',
     's_proxy': 'proxy_ip',
+     # the name of set which stores url of posts
     's_url': 'url'
 }
 
