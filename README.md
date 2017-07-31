@@ -73,4 +73,3 @@ def get_url(url):
 
 ## 项目地址
 #### https://github.com/A1014280203/Ugly-Distributed-Crawler
-> 有任何问题可以与我联系(微信：smartseer)
